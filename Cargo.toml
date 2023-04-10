@@ -1,0 +1,47 @@
+[workspace]
+resolver = "2"
+members = []
+
+[package]
+name = "point-cloud-bevy"
+version = "0.1.0"
+authors = ["DENIS BYKOV <z.bykov.d@gmail.com>"]
+readme = "README.md"
+description = """
+Short description goes here.
+"""
+#license = "MIT OR Apache-2.0"
+#repository = "https://github.com/z.bykov.d/point-cloud-bevy"
+edition = "2021"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+default-run = "point-cloud-bevy"
+
+[features]
+default = ["editor"]
+editor = ["bevy_editor_pls"]
+inspector = ["bevy-inspector-egui"]
+
+[dependencies]
+ply-rs = "*"
+# Other crates of possible interest:
+# https://bevyengine.org/assets/#assets
+# https://gist.github.com/taurr/962ceb49472993e3092e97b07339c164
+bevy = { version = "0.9.1", features = ["dynamic"] }
+bevy_editor_pls = { version = "0.2.0", optional = true }
+bevy-inspector-egui = { version = "0.14", optional = true }
+
+[target.'cfg(target_arch="wasm32")'.dependencies]
+bevy-web-resizer = "4.0" #[patch.crates-io]
+#bevy = { git = "https://github.com/bevyengine/bevy", branch = "main" }
+
+[dev-dependencies]
+anyhow = "1.0"
+
+#[patch.crates-io]
+# Enable only a small amount of optimization in debug mode
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
+
