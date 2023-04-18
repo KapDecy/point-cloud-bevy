@@ -84,7 +84,6 @@ impl PlyPlugin {
         mut commands: Commands,
         mut meshes: ResMut<Assets<Mesh>>,
         mut materials: ResMut<Assets<StandardMaterial>>,
-        asset_server: Res<AssetServer>,
     ) {
         // set up a reader, in this a file.
         let path = "point_cloud.ply";
@@ -122,7 +121,7 @@ impl PlyPlugin {
         let mut transforms = vec![];
         // let color = Color::rgb_u8(0,0,0).as_rgba_f32()
 
-        for vertex in vertex_list[0..200_000].iter() {
+        for vertex in vertex_list[0..400_000].iter() {
             let mut mesh: Mesh = shape::Icosphere {
                 radius: 0.06,
                 subdivisions: 0,

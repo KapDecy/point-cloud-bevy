@@ -12,7 +12,7 @@ impl Plugin for PointCloudBevyPlugin {
 pub struct PointCloudBevyComponent;
 
 impl PointCloudBevyPlugin {
-    fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+    fn setup(mut _commands: Commands, _asset_server: Res<AssetServer>) {
         // use std::f32::consts::TAU;
         // commands
         //     .spawn(PointCloudBevyComponent)
