@@ -45,4 +45,10 @@ fn spawn_camera(mut commands: Commands, mut ambient_light: ResMut<AmbientLight>)
             .looking_at(Vec3::new(-3.6, 3.11, 5.6), Vec3::Y),
         ..default()
     });
+
+    commands.spawn(PointLightBundle {
+        point_light: PointLight::default(),
+        transform: Transform::from_xyz(-5., 5., 7.),
+        ..default()
+    });
 }

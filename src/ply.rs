@@ -121,13 +121,13 @@ impl PlyPlugin {
         let mut transforms = vec![];
         // let color = Color::rgb_u8(0,0,0).as_rgba_f32()
 
-        for vertex in vertex_list[0..400_000].iter() {
-            let mut mesh: Mesh = shape::Icosphere {
-                radius: 0.06,
-                subdivisions: 0,
-            }
-            .into();
-            // let mut mesh: Mesh = shape::Cube { size: 0.1 }.into();
+        for vertex in vertex_list[0..600_000].iter() {
+            // let mut mesh: Mesh = shape::Icosphere {
+            //     radius: 0.04,
+            //     subdivisions: 0,
+            // }
+            // .into();
+            let mut mesh: Mesh = shape::Cube { size: 0.035 }.into();
 
             let color = Color::rgb_u8(vertex.red, vertex.green, vertex.blue);
 
@@ -139,25 +139,6 @@ impl PlyPlugin {
             my_meshes.push(mesh);
 
             transforms.push(Transform::from_xyz(vertex.x, vertex.y, vertex.z));
-
-            // commands.spawn(PbrBundle {
-            //     mesh: meshes.add(
-            //         Mesh::try_from(shape::Icosphere {
-            //             radius: 0.1,
-            //             subdivisions: 1,
-            //         })
-            //         .unwrap(),
-            //     ),
-            //     material: materials.add(StandardMaterial {
-            //         base_color: Color::rgb_u8(vertex.red, vertex.green, vertex.blue),
-            //         // vary key PBR parameters on a grid of spheres to show the effect
-            //         metallic: 1.,
-            //         perceptual_roughness: 1.,
-            //         ..default()
-            //     }),
-            //     transform: Transform::from_xyz(vertex.x, vertex.y, vertex.z),
-            //     ..default()
-            // });
         }
         let main_mesh = combine_meshes(my_meshes, transforms, true, false, true, true);
 
@@ -232,15 +213,6 @@ fn combine_meshes(
             }
 
             if use_normals {
-                // Comment below taken from mesh_normal_local_to_world() in mesh_functions.wgsl regarding
-                // transform normals from local to world coordinates:
-
-                // NOTE: The mikktspace method of normal mapping requires that the world normal is
-                // re-normalized in the vertex shader to match the way mikktspace bakes vertex tangents
-                // and normal maps so that the exact inverse process is applied when shading. Blender, Unity,
-                // Unreal Engine, Godot, and more all use the mikktspace method. Do not change this code
-                // unless you really know what you are doing.
-                // http://www.mikktspace.com/
 
                 let inverse_transpose_model = mat.inverse().transpose();
                 let inverse_transpose_model = Mat3 {
