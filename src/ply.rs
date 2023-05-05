@@ -121,7 +121,7 @@ impl PlyPlugin {
         let mut transforms = vec![];
         // let color = Color::rgb_u8(0,0,0).as_rgba_f32()
 
-        for vertex in vertex_list[0..600_000].iter() {
+        for vertex in vertex_list[0..1_700_000].iter() {
             // let mut mesh: Mesh = shape::Icosphere {
             //     radius: 0.04,
             //     subdivisions: 0,
@@ -213,7 +213,6 @@ fn combine_meshes(
             }
 
             if use_normals {
-
                 let inverse_transpose_model = mat.inverse().transpose();
                 let inverse_transpose_model = Mat3 {
                     x_axis: inverse_transpose_model.x_axis.xyz(),

@@ -23,7 +23,6 @@ impl PluginGroup for DebugPlugins {
     fn build(self) -> bevy::app::PluginGroupBuilder {
         bevy::app::PluginGroupBuilder::start::<Self>()
             .add(bevy::diagnostic::FrameTimeDiagnosticsPlugin)
-            .add(bevy_editor_pls::EditorPlugin)
     }
 
     #[cfg(debug_assertions)]

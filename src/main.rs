@@ -1,5 +1,6 @@
 #![doc = include_str!("../README.md")]
 use bevy::prelude::*;
+use bevy_editor_pls::prelude::*;
 use ply::PlyPlugin;
 use point_cloud_bevy::*;
 
@@ -15,19 +16,20 @@ fn main() {
 
     app.insert_resource(ClearColor(BACKGROUND_COLOR))
         .add_plugins(DefaultPlugins.set(WindowPlugin {
-            window: WindowDescriptor {
+            primary_window: Some(Window {
                 title: format!(
                     "{} - v{}",
                     env!("CARGO_PKG_NAME"),
                     env!("CARGO_PKG_VERSION")
                 ),
-                width: WIDTH,
-                height: HEIGHT,
+                resolution: (WIDTH, HEIGHT).into(),
+                present_mode: bevy::window::PresentMode::AutoVsync,
                 ..default()
-            },
+            }),
             ..default()
         }))
-        .add_plugins(debug::DebugPlugins)
+        // .add_plugins(debug::DebugPlugins)
+        .add_plugin(EditorPlugin::default())
         .add_startup_system(spawn_camera)
         .add_plugin(PointCloudBevyPlugin)
         .add_plugin(PlyPlugin);
